@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using _6313Titan.Models;
+using _6313.Controllers;
 
 namespace _6313Titan.Controllers
 {

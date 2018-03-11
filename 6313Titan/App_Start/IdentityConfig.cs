@@ -11,6 +11,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using _6313Titan.Models;
+using System.Net.Mail;
+using SendGrid.Helpers.Mail;
+using SendGrid;
 
 namespace _6313Titan
 {
@@ -19,7 +22,63 @@ namespace _6313Titan
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
+            configSendGridasyncAsync(message);
             return Task.FromResult(0);
+        }
+
+
+        static async Task configSendGridasyncAsync(IdentityMessage message)
+        {
+            try
+            {
+                var apiKey = System.Environment.GetEnvironmentVariable("SENDGRID_APIKEY");
+                var client = new SendGridClient(apiKey);
+                var msg = new SendGridMessage()
+                {
+                    From = new EmailAddress("register@6313.com", "6313 Team"),
+                    Subject = message.Subject,
+                    PlainTextContent = message.Body,
+                    HtmlContent = message.Body
+                };
+                msg.AddTo(new EmailAddress(message.Destination));
+                var response = await client.SendEmailAsync(msg);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+
+            //return Task.FromResult(0);
+        }
+        public bool SendEmail(string mailTo, string subject, string body)
+        {
+            try
+            {
+                SmtpClient SmtpServer = new SmtpClient();
+                MailMessage mail = new MailMessage();
+                SmtpServer.Credentials = new System.Net.NetworkCredential("beattie.edwin@gmail.com", "g1ll1angm");
+                SmtpServer.Port = 587;
+                SmtpServer.Host = "smtp.gmail.com";
+                SmtpServer.EnableSsl = true;
+                mail = new MailMessage();
+                AlternateView plainView = AlternateView.CreateAlternateViewFromString("Sorry you dont support HTML", null, "text/plain");
+                AlternateView htmlView = AlternateView.CreateAlternateViewFromString(body, null, "text/html");
+                mail.AlternateViews.Add(plainView);
+                mail.AlternateViews.Add(htmlView);
+                mail.From = new MailAddress("beattie.edwin@gmail.com", "6313 Admin");
+                mail.To.Add(mailTo);
+                mail.Subject = subject;
+                mail.IsBodyHtml = true;
+                SmtpServer.Send(mail);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 
@@ -40,7 +99,7 @@ namespace _6313Titan
         {
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
             // Configure validation logic for usernames
@@ -81,7 +140,7 @@ namespace _6313Titan
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = 
+                manager.UserTokenProvider =
                     new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
