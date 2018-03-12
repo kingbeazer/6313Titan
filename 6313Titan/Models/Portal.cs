@@ -5,7 +5,7 @@ using System.Web;
 
 namespace _6313Titan.Models
 {
-    public class Portal
+    public class Portal : BaseEntity
     {
         public Guid Id { get; set; }
         public String Name { get; set; }
