@@ -54,6 +54,8 @@ namespace _6313Titan.Controllers
             var ViewModel = new PortalUserViewModel();
                 ViewModel.Portal = portal;
                 ViewModel.UserID = id;
+                                var PortalCases = (from x in _context.Cases where x.PortalId == id select x).ToList();
+            ViewModel.PortalCases = PortalCases;
                 return View("PortalForm", ViewModel);
             }
             else

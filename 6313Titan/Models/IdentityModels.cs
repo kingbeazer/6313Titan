@@ -42,7 +42,7 @@ namespace _6313Titan.Models
     {
         public DbSet<Portal> Portals { get; set; }
         public DbSet<PortalUser> PortalUsers { get; set; }
-
+        public DbSet<Case> Cases { get; set; }
 
         public override int SaveChanges()
         {

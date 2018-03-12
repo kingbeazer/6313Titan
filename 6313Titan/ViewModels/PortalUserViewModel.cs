@@ -9,7 +9,10 @@ namespace _6313Titan.ViewModels
     public class PortalUserViewModel
     {
         public Portal Portal { get; set; }
+
         public Guid UserID { get; set; }
+
+        public IEnumerable<Case> PortalCases { get; set; }
 
     }
 }

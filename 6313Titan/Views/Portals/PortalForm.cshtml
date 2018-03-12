@@ -6,8 +6,46 @@
 }
 
 <div class="main">
-<h2>@Model.Portal.Name</h2>
+    <h2>@Model.Portal.Name</h2>
 </div>
 
+ 
+<div class="row">
+    @foreach (var portalCase in Model.PortalCases)
+    {
+        <div class="col-md-4">
+            <h2>@portalCase.Subject</h2>
+            <div class="row imagetile">
+                <div class="col-md-5">
+                    <table>
+                        <tbody>
+                            <tr>
+                                @*<td>
+                                        <div class="left-image">
+                                            <img style="width:90px" src="~/Content/Images/gonzo.jpg" />
+                                        </div>
+                                    </td>*@
+                                <td>
+                                    <div style="horz-align: right;">
+                                        <div class="e-exptitle">
+                                            <label class="e-name">
+                                                Owner: @User.Identity.Name
+                                            </label><br>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
+            </div>
+            <p>
+                @portalCase.Description
+            </p>
+        </div>
+    }
+</div>
+    
 
+<p><a class="btn btn-default" style="width: 200px" onclick="location.href='@Url.Action( "New", "Cases", new { PortalId = Model.Portal.Id }, null)'">Add Case</a></p>
