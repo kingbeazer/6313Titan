@@ -1,7 +1,10 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
+using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -39,6 +42,40 @@ namespace _6313Titan.Models
     {
         public DbSet<Portal> Portals { get; set; }
         public DbSet<PortalUser> PortalUsers { get; set; }
+
+
+        public override int SaveChanges()
+        {
+            AddTimestamps();
+            return base.SaveChanges();
+        }
+
+        public override async Task<int> SaveChangesAsync()
+        {
+            AddTimestamps();
+            return await base.SaveChangesAsync();
+        }
+
+        private void AddTimestamps()
+        {
+            var entities = ChangeTracker.Entries().Where(x => x.Entity is BaseEntity && (x.State == EntityState.Added || x.State == EntityState.Modified));
+
+            var currentUsername = !string.IsNullOrEmpty(System.Web.HttpContext.Current?.User?.Identity?.Name)
+                ? HttpContext.Current.User.Identity.Name
+                : "PlaceholderLoggedInUser";
+
+            foreach (var entity in entities)
+            {
+                if (entity.State == EntityState.Added)
+                {
+                    ((BaseEntity)entity.Entity).DateCreated = DateTime.UtcNow;
+                    ((BaseEntity)entity.Entity).UserCreated = currentUsername;
+                }
+
+                ((BaseEntity)entity.Entity).DateModified = DateTime.UtcNow;
+                ((BaseEntity)entity.Entity).UserModified = currentUsername;
+            }
+        }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

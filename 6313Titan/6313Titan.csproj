@@ -213,8 +213,13 @@
     <Compile Include="Migrations\201803122118136_AddPortalUsers.Designer.cs">
       <DependentUpon>201803122118136_AddPortalUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803122238411_AddBaseEntity.cs" />
+    <Compile Include="Migrations\201803122238411_AddBaseEntity.Designer.cs">
+      <DependentUpon>201803122238411_AddBaseEntity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Portal.cs" />
@@ -351,6 +356,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803122118136_AddPortalUsers.resx">
       <DependentUpon>201803122118136_AddPortalUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803122238411_AddBaseEntity.resx">
+      <DependentUpon>201803122238411_AddBaseEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
