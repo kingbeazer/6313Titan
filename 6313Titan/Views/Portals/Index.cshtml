@@ -1,0 +1,65 @@
+﻿@model IEnumerable<_6313Titan.Models.Portal>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Create New Portal</h2>
+        <p>
+            Describe what portals are here
+        </p>
+        <p><a class="btn btn-default" style="width: 200px" onclick="location.href='@Url.Action("New", "Portals")'">New &raquo;</a></p>
+    </div>
+</div>
+@if (!Model.Any())
+{
+    @*<p> We don't have any customers yet.</p>*@
+}
+else
+{
+    var batches = Model.Select((x, i) => new { x, i })
+.GroupBy(p => (p.i / 3), p => p.x);
+
+    foreach (var row in batches)
+    {
+        <div class="row">
+            @foreach (var portal in row)
+            {
+                <div class="col-md-4">
+                    <h2>@portal.Name</h2>
+                    <div class="row imagetile">
+                        <div class="col-md-5">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        @*<td>
+                                            <div class="left-image">
+                                                <img style="width:90px" src="~/Content/Images/gonzo.jpg" />
+                                            </div>
+                                        </td>*@
+                                        <td>
+                                            <div style="horz-align: right;">
+                                                <div class="e-exptitle">
+                                                    <label class="e-name">
+                                                        Owner: @User.Identity.Name
+                                                    </label><br>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    <p>
+                        @portal.Description
+                    </p>
+                    <p><a class="btn btn-default" style="width: 200px" onclick="location.href='@Url.Action( "Details", "Portals", new { id = portal.Id }, null)'">Access Portal &raquo;</a></p>
+                </div>
+            }
+        </div>
+    }
+}
