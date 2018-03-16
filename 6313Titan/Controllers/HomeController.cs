@@ -6,7 +6,6 @@ using System.Web.Mvc;
 
 namespace _6313Titan.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -24,6 +23,13 @@ namespace _6313Titan.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        public ActionResult Cases()
+        {
+            ViewBag.Message = "Your cases page.";
 
             return View();
         }

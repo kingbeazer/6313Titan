@@ -25,14 +25,14 @@ namespace _6313Titan.Controllers.Api
             return _context.Cases.ToList().Select(Mapper.Map<Case,CaseDTO>);
         }
 
-        public CaseDTO GetCase(Guid Id)
+        public IHttpActionResult GetCase(Guid Id)
         {
             var Case = _context.Cases.SingleOrDefault(c => c.Id == Id);
 
             if (Case == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
 
-            return Mapper.Map<Case,CaseDTO>(Case);
+            return Ok( Mapper.Map<Case,CaseDTO>(Case));
         }
 
         [HttpPost]
