@@ -358,6 +358,7 @@
     <Content Include="Views\Portals\New.cshtml" />
     <Content Include="Views\Portals\PortalForm.cshtml" />
     <Content Include="Views\Cases\CaseForm.cshtml" />
+    <Content Include="Views\Portals\PortalAdminForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

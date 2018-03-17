@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using _6313Titan.Models;
 using _6313Titan;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace _6313.Controllers
 {
@@ -172,6 +173,11 @@ namespace _6313.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    //var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    //await roleManager.CreateAsync(new IdentityRole("CanManagePortals"));
+                    //await UserManager.AddToRoleAsync(user.Id, "CanManagePortals");
+                    
                     //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

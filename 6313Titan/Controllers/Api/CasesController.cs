@@ -50,6 +50,11 @@ namespace _6313Titan.Controllers.Api
             return Created(new Uri (Request.RequestUri + "/" + Case.Id),CaseDto);
         }
 
+      
+
+
+
+
         public void UpdateCase(Guid Id, CaseDTO CaseDto)
         {
             if (!ModelState.IsValid)
