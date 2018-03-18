@@ -5,11 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <div class="main">
     <h2>@Model.Portal.Name</h2>
 </div>
 
- 
+
 <div class="row">
     @foreach (var portalCase in Model.PortalCases)
     {
@@ -46,6 +47,6 @@
         </div>
     }
 </div>
-    
+
 
 <p><a class="btn btn-default" style="width: 200px" onclick="location.href='@Url.Action( "New", "Cases", new { PortalId = Model.Portal.Id }, null)'">Add Case</a></p>
