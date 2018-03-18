@@ -211,6 +211,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\CasesController.cs" />
     <Compile Include="Controllers\CasesController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PortalsController.cs" />
@@ -238,16 +239,22 @@
     <Compile Include="Migrations\201803122250537_AddCases.Designer.cs">
       <DependentUpon>201803122250537_AddCases.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803182006373_AddContact.cs" />
+    <Compile Include="Migrations\201803182006373_AddContact.Designer.cs">
+      <DependentUpon>201803182006373_AddContact.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\Case.cs" />
+    <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Portal.cs" />
     <Compile Include="Models\PortalUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ContactFormViewModel.cs" />
     <Compile Include="ViewModels\PortalCaseViewModel.cs" />
     <Compile Include="ViewModels\PortalUserViewModel.cs" />
   </ItemGroup>
@@ -358,6 +365,8 @@
     <Content Include="Views\Portals\New.cshtml" />
     <Content Include="Views\Portals\PortalForm.cshtml" />
     <Content Include="Views\Cases\CaseForm.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Contact\ContactForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -386,6 +395,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803122250537_AddCases.resx">
       <DependentUpon>201803122250537_AddCases.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803182006373_AddContact.resx">
+      <DependentUpon>201803182006373_AddContact.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
