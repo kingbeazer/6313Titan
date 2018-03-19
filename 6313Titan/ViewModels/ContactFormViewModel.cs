@@ -10,6 +10,6 @@ namespace _6313Titan.ViewModels
     {
         public Contact Contact { get; set; }
 
-
+        public Guid PortalId { get; set; }
     }
 }

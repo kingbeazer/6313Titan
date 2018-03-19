@@ -34,55 +34,55 @@ namespace _6313Titan.Controllers
             ViewBag.datasource = contacts;
 
 
-            return View();
+            return View(contacts);
         }
 
         [Authorize]
-        public ActionResult New()
+        public ActionResult New(Guid PortalId)
         {
-
-            var viewModel = new ContactFormViewModel
-            {
-                Contact = new Contact()
-
-            };
-
+            var contact = new Contact();
+            var viewModel = new ContactFormViewModel();
+            viewModel.Contact = contact;
+            viewModel.PortalId = PortalId;
 
             return View("ContactForm", viewModel);
+
         }
 
         [HttpPost]
-        public ActionResult Save(Contact contact)
+        public ActionResult Save(ContactFormViewModel contactFormViewModel)
         {
             if (!ModelState.IsValid)
             {
                 var viewModel = new ContactFormViewModel
                 {
 
-                    Contact = contact
+                    Contact = contactFormViewModel.Contact
 
                 };
                 return View("ContactForm", viewModel);
             }
 
-            if (contact.Id == Guid.Empty)
+            if (contactFormViewModel.Contact.Id == Guid.Empty)
             {
-                contact.Id = Guid.NewGuid();
+                contactFormViewModel.Contact.Id = Guid.NewGuid();
                 //contact.PortalId = Titan.Controllers.PortalsController.CurrentPortalGuid;
-                var portalId = User.Identity.GetUserId();
-                contact.PortalId = Guid.Parse(portalId);
-                _context.Contact.Add(contact);
+                contactFormViewModel.Contact.PortalId  = contactFormViewModel.PortalId;
+
+
+
+                _context.Contact.Add(contactFormViewModel.Contact);
             }
             else
             {
-                var contactInDb = _context.Contact.Single(c => c.Id == contact.Id);
-                contactInDb.Name = contact.Name;
-                contactInDb.Email = contact.Email;
-                contactInDb.MobileNumber = contact.MobileNumber;
-                contactInDb.WorkNumber = contact.WorkNumber;
+                var contactInDb = _context.Contact.Single(c => c.Id == contactFormViewModel.Contact.Id);
+                contactInDb.Name = contactFormViewModel.Contact.Name;
+                contactInDb.Email = contactFormViewModel.Contact.Email;
+                contactInDb.MobileNumber = contactFormViewModel.Contact.MobileNumber;
+                contactInDb.WorkNumber = contactFormViewModel.Contact.WorkNumber;
             }
             _context.SaveChanges();
-            return RedirectToAction("Index", "Contact");
+            return RedirectToAction("Index", "Contact", new { PortalId = contactFormViewModel.PortalId });
         }
     }
 }

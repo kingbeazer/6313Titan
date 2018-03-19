@@ -1,9 +1,9 @@
 ﻿@model _6313Titan.ViewModels.ContactFormViewModel
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "ContactForm";
-                Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "ContactForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>ContactForm</h2>
@@ -35,6 +35,7 @@
 
 
     @Html.HiddenFor(m => m.Contact.Id)
+    @Html.HiddenFor(m => m.PortalId)
 
 
     <button type="submit" class="btn btn-primary">Save</button>
