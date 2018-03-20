@@ -10,6 +10,8 @@
     <script src="~/Scripts/bootstrap.bundle.js"></script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/lib")
+
 
 </head>
 <body>
@@ -59,7 +61,6 @@
             <p>&copy; @DateTime.Now.Year</p>
         </footer>
     </div>
-    @Scripts.Render("~/bundles/lib")
     @RenderSection("scripts", required: false)
 </body>
 </html>
