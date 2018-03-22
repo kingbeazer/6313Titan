@@ -9,12 +9,34 @@
 <h2>Index</h2>
 
 
-<section class="text-center placeholders">
-    <div class="main">
 
 
 
-        <a href="@Url.Action("New", "Import", new { PortalId = ViewBag.Data }, null)">
+
+<div class="main">
+    <div class="app-container"style="text-align:center">
+        <div class="row">
+            <div class="col-1">
+                <a href="@Url.Action("New", "Import", new { PortalId = ViewBag.Data }, null)">
+                    <i class="fas fa-arrow-circle-down fa-5x" width="200" height="200"></i>
+                    <h4>Data Imports</h4>
+                </a>
+            </div>
+
+            <div class="col-1">
+                <i class="fas fa-arrow-circle-down fa-5x" width="200" height="200"></i>
+                <h4>Another admin task</h4>               
+            </div>
+
+            <div class="col-1">
+                <i class="fas fa-arrow-circle-down fa-5x" width="200" height="200"></i>
+                <h4>Another admin task</h4>
+            </div>
+
+        </div>
+    </div>
+</div>
+    @*<a href="@Url.Action("New", "Import", new { PortalId = ViewBag.Data }, null)">
 
             <div class="col-6 col-sm-3 placeholder">
                 <i class="fas fa-arrow-circle-down fa-5x" width="200" height="200"></i>
@@ -38,7 +60,8 @@
             <i class="fas fa-bolt fa-5x" width="200" height="200"></i>
             <h4>Another admin task</h4>
             <div class="text-muted">Some other admin task</div>
-        </div>
+        </div>*@
 
-    </div>
-</section>
+</div>
+
+
