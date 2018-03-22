@@ -54,11 +54,13 @@ namespace _6313Titan.Controllers
             var ViewModel = new PortalUserViewModel();
                 ViewModel.Portal = portal;
                 ViewModel.UserID = id;
-                                var PortalCases = (from x in _context.Cases where x.PortalId == id select x).ToList();
-            ViewModel.PortalCases = PortalCases;
+                var PortalCases = (from x in _context.Cases where x.PortalId == id select x).ToList();
+                ViewModel.PortalCases = PortalCases;
                 if (User.IsInRole("CanManagePortals"))
-                return View("PortalAdminForm", ViewModel);
-                return View("PortalForm", ViewModel);
+                    return View("PortalAdminForm", ViewModel);
+                else
+                    return View("PortalForm", ViewModel);
+
             }
             else
                 return Content("Sorry not Authorised to View!");

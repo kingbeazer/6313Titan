@@ -177,7 +177,7 @@ namespace _6313.Controllers
                     //var roleManager = new RoleManager<IdentityRole>(roleStore);
                     //await roleManager.CreateAsync(new IdentityRole("CanManagePortals"));
                     //await UserManager.AddToRoleAsync(user.Id, "CanManagePortals");
-                    
+
                     //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
