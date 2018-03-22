@@ -214,6 +214,7 @@
     <Compile Include="Controllers\CasesController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImportController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PortalsController.cs" />
     <Compile Include="DTOs\CaseDTO.cs" />
@@ -257,6 +258,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="ViewModels\ContactFormViewModel.cs" />
+    <Compile Include="ViewModels\ImportFormViewModel.cs" />
     <Compile Include="ViewModels\PortalCaseViewModel.cs" />
     <Compile Include="ViewModels\PortalUserViewModel.cs" />
   </ItemGroup>
@@ -381,6 +383,7 @@
     <Content Include="Views\Shared\_menuPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Administration\Index.cshtml" />
+    <Content Include="Views\Import\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
