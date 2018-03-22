@@ -1,0 +1,40 @@
+﻿
+@{
+    string valuePassedIn = this.ViewData.ContainsKey("VariableName") ? this.ViewData["VariableName"].ToString() : string.Empty;
+}
+
+<link href="~/Content/SideMenu.css" rel="stylesheet" />
+<div class="nav-side-menu">
+   
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+    <div class="menu-list">
+
+        <ul id="menu-content" class="menu-content collapse out">
+            @*<li>
+            @Html.ActionLink("Titan", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        </li>*@
+            <li></li>
+
+            <li style="margin-top: 20px" class='@Html.IsActive("Case", "Index")'>
+                <a href="@Url.Action("Index", "Case", new { PortalId = valuePassedIn }, null)">
+                    <i class="fas fa-briefcase fa-3x"></i>
+                </a>
+            </li>
+
+            <li style="margin-top: 20px" class='@Html.IsActive("Contact", "Index")'>
+                <a href="@Url.Action("Index", "Contact",new { PortalId = valuePassedIn }, null)">
+                    <i class="fas fa-address-book fa-3x"></i>
+                </a>
+            </li>            
+
+            <li style="margin-top: 20px" class='@Html.IsActive("Administration", "Index")'>
+                <a href="@Url.Action("Index", "Administration",new { PortalId = valuePassedIn }, null)">
+                    <i class="fas fa-cog fa-3x"></i>
+                </a>
+            </li>
+
+
+        </ul>
+    </div>
+</div>
