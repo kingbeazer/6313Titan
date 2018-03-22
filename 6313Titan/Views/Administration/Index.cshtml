@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/_menuPartial.cshtml", null, new ViewDataDictionary { { "VariableName", ViewBag.Data } })
+
+<h2>Index</h2>
+
+
+<section class="text-center placeholders">
+    <div class="main">
+
+
+
+        <a href="@Url.Action("New", "Import", new { PortalId = ViewBag.Data }, null)">
+
+            <div class="col-6 col-sm-3 placeholder">
+                <i class="fas fa-arrow-circle-down fa-5x" width="200" height="200"></i>
+                <h4>Data Imports</h4>
+                <div class="text-muted">Import your data here</div>
+            </div>
+        </a>
+        <div class="col-6 col-sm-3 placeholder">
+            <i class="fas fa-birthday-cake fa-5x" width="200" height="200"></i>
+            <h4>Another admin task</h4>
+            <div class="text-muted">Some other admin task</div>
+        </div>
+
+        <div class="col-6 col-sm-3 placeholder">
+            <i class="fas fas fa-binoculars fa-5x" width="200" height="200"></i>
+            <h4>Another admin task</h4>
+            <div class="text-muted">Some other admin task</div>
+        </div>
+
+        <div class="col-6 col-sm-3 placeholder">
+            <i class="fas fa-bolt fa-5x" width="200" height="200"></i>
+            <h4>Another admin task</h4>
+            <div class="text-muted">Some other admin task</div>
+        </div>
+
+    </div>
+</section>
