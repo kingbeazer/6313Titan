@@ -5,40 +5,69 @@
 
 }
 @Html.Partial("~/Views/Shared/_menuPartial.cshtml", null, new ViewDataDictionary { { "VariableName", ViewBag.Data } })
+<form onsubmit="return false" id="importForm">
+    <div class="main">
 
-<div class="main">
-
-    <h2>Contact Import</h2>
+        <h2>Contact Import</h2>
 
 
-    <div class="panel panel-default" style="width: 33%">
-        <div class="panel-heading" style="font-weight:bold">Import your contacts in 3 easy steps...</div>
+        <div class="panel panel-default" style="width: 33%">
+            <div class="panel-heading" style="font-weight:bold">Import your contacts in 3 easy steps...</div>
 
-        <div class="panel-body" style="font-weight:bold ">Step 1. Download our template</div>
-        <hr style="margin-bottom:0px;margin-top:0px" />
-        <div class="panel-body">First, get our template from the link below.</div>
-        <div class="panel-body">TEMPLATE FILE TO GO HERE</div>
-        <br />
+            <div class="panel-body" style="font-weight:bold ">Step 1. Download our template</div>
+            <hr style="margin-bottom:0px;margin-top:0px" />
+            <div class="panel-body">First, get our template from the link below.</div>
+            <div class="panel-body">TEMPLATE FILE TO GO HERE</div>
+            <br />
 
-        <div class="panel-body" style="font-weight:bold ">Step 2. Populate our template</div>
-        <hr style="margin-bottom:0px;margin-top:0px" />
-        <div class="panel-body">
-            Export the contacts from your old system as a comma seperated list. Use your favourite spreadsheet editor to copy and paste your exported
-            contacts into our provided template. Make sure the data matches the column headers, make sure you save the template files as a csv(comma seperated value)
+            <div class="panel-body" style="font-weight:bold ">Step 2. Populate our template</div>
+            <hr style="margin-bottom:0px;margin-top:0px" />
+            <div class="panel-body">
+                Export the contacts from your old system as a comma seperated list. Use your favourite spreadsheet editor to copy and paste your exported
+                contacts into our provided template. Make sure the data matches the column headers, make sure you save the template files as a csv(comma seperated value)
+            </div>
+            <br />
+            <hr style="margin-bottom:0px;margin-top:0px" />
+
+            <div class="panel-body" style="font-weight:bold ">Step 3. Import the updated template file</div>
+            <br />
+            <label class="btn btn-default">
+                Browse <input type="file" name="file" id="fileUpload">
+            </label>
         </div>
-        <br />
-        <hr style="margin-bottom:0px;margin-top:0px" />
+        <div class="loader" id="loader" style="display:none">
+            <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+        </div>
 
-        <div class="panel-body" style="font-weight:bold ">Step 3. Import the updated template file</div>
-        <br />
-        <label class="btn btn-default ">
-            Browse <input type="file" name="file">
-        </label>
+        <button onclick="showLoadingIcon()">Click Me</button>
+
+
+        <button type="submit" class="btn btn-default" onclick="checkIfFilesHasBeenSelected()">Submit</button>
     </div>
+</form>
 
+<script>
+    function showLoadingIcon() {
+        var x = document.getElementById("loader");
 
-    <button type="submit" class="btn btn-default">Submit</button>
-</div>
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
 
+<script>
+    function checkIfFilesHasBeenSelected() {
+        if (document.getElementById("fileUpload").files.length == 0) {
+            console.log("no files selected");
+            alert("lol");
+        }
+    }
+    function yes() {
 
-}
+        alert("lol");
+
+    }
+</script>
