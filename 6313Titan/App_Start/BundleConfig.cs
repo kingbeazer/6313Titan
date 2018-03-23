@@ -11,6 +11,7 @@ namespace _6313Titan
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/bootstrap.js",
+                        "~/scripts/bootbox.js",
                         "~/Scripts/respond.js",
                         "~/scripts/datatables/jquery.datatables.js",
                         "~/scripts/datatables/datatables.bootstrap.js",
@@ -28,12 +29,13 @@ namespace _6313Titan
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap-Slate.css",
-                      "~/Content/bootstrap-theme.css",
-                      "~/content/datatables/css/datatables.bootstrap.css",
-                      "~/content/typeahead.css",
-                      "~/content/toastr.css",
-                      "~/Content/site.css"));
+                     "~/Content/bootstrap-Slate.css",
+                     "~/Content/bootstrap-theme.css",
+                     "~/content/datatables/css/datatables.bootstrap.css",
+                     "~/content/typeahead.css",
+                     "~/content/toastr.css",
+                     "~/Content/site.css"));
+
         }
     }
 }
