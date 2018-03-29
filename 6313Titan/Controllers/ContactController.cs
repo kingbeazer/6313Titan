@@ -26,7 +26,7 @@ namespace _6313Titan.Controllers
         {
             ViewBag.data = PortalId;
 
-            var contacts = unitofwork.Contacts.GetAll();
+            var contacts = unitofwork.Contacts.Find(contact => contact.PortalId == PortalId);
             ViewBag.datasource = contacts;
 
 
@@ -45,40 +45,41 @@ namespace _6313Titan.Controllers
 
         }
 
-        //[HttpPost]
-        //public ActionResult Save(ContactFormViewModel contactFormViewModel)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        var viewModel = new ContactFormViewModel
-        //        {
+        [HttpPost]
+        public ActionResult Save(ContactFormViewModel contactFormViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new ContactFormViewModel
+                {
 
-        //            Contact = contactFormViewModel.Contact
+                    Contact = contactFormViewModel.Contact
 
-        //        };
-        //        return View("ContactForm", viewModel);
-        //    }
+                };
+                return View("ContactForm", viewModel);
+            }
 
-        //    if (contactFormViewModel.Contact.Id == Guid.Empty)
-        //    {
-        //        contactFormViewModel.Contact.Id = Guid.NewGuid();
-        //        //contact.PortalId = Titan.Controllers.PortalsController.CurrentPortalGuid;
-        //        contactFormViewModel.Contact.PortalId  = contactFormViewModel.PortalId;
+            if (contactFormViewModel.Contact.Id == Guid.Empty)
+            {
+                contactFormViewModel.Contact.Id = Guid.NewGuid();
+                //contact.PortalId = Titan.Controllers.PortalsController.CurrentPortalGuid;
+                contactFormViewModel.Contact.PortalId = contactFormViewModel.PortalId;
 
 
 
-        //        unitofwork.Contacts.Add(contactFormViewModel.Contact);
-        //    }
-        //    else
-        //    {
-        //        var contactInDb = unitofwork.Contacts.Get(contactFormViewModel.Contact.Id);
-        //        contactInDb.Name = contactFormViewModel.Contact.Name;
-        //        contactInDb.Email = contactFormViewModel.Contact.Email;
-        //        contactInDb.MobileNumber = contactFormViewModel.Contact.MobileNumber;
-        //        contactInDb.WorkNumber = contactFormViewModel.Contact.WorkNumber;
-        //    }
-        //    _context.SaveChanges();
-        //    return RedirectToAction("Index", "Contact", new { PortalId = contactFormViewModel.PortalId });
-        //}
+                unitofwork.Contacts.Add(contactFormViewModel.Contact);
+                unitofwork.Complete();
+            }
+            else
+            {
+                var contactInDb = unitofwork.Contacts.Get(contactFormViewModel.Contact.Id);
+                contactInDb.Name = contactFormViewModel.Contact.Name;
+                contactInDb.Email = contactFormViewModel.Contact.Email;
+                contactInDb.MobileNumber = contactFormViewModel.Contact.MobileNumber;
+                contactInDb.WorkNumber = contactFormViewModel.Contact.WorkNumber;
+            }
+                //unitofwork.Contacts.Add(contactFormViewModel.Contact);
+            return RedirectToAction("Index", "Contact", new { PortalId = contactFormViewModel.PortalId });
+        }
     }
 }
