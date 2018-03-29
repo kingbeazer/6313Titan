@@ -215,6 +215,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PortalsController.cs" />
+    <Compile Include="DataAccess\Core\Repositories\IContactRepository.cs" />
+    <Compile Include="DataAccess\Core\Repositories\IUnitOfWork.cs" />
+    <Compile Include="DataAccess\Core\Repositories\IRepository.cs" />
+    <Compile Include="DataAccess\Persistence\Repositories\ContactRepository.cs" />
+    <Compile Include="DataAccess\Persistence\Repositories\Repository.cs" />
+    <Compile Include="DataAccess\Persistence\Repositories\UnitOfWork.cs" />
     <Compile Include="DTOs\CaseDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -382,6 +388,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="DAL\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
