@@ -1,0 +1,59 @@
+﻿@using _6313Titan.Models;
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+    <div class="table-responsive" id="divResult"></div>
+
+    <script type="text/javascript">
+
+        var Case = {
+            id: $('#txtaddCaseid').val(),
+            subject: $('#txtaddCaseSubject').val(),
+            description: $('#txtaddCaseDescription').val()
+        };
+
+        function GetAllEmployees() {
+            jQuery.support.cors = true;
+            $.ajax({
+                url: '/api/cases',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    WriteResponse(data);
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
+
+
+        function WriteResponse(employees) {
+            var strResult = '<table class ="table table-dark"><th>Subject</th><th>Desxription</th>';
+            $.each(employees, function () {
+                strResult += "<tr>";
+                if (this.subject) strResult += "<td>" + this.subject + "</td>";
+                if (!this.subject) strResult += "<td></td> ";
+                if (this.description) strResult += "<td>" + this.description + "</td>";
+                if (!this.description) strResult += "<td></td> ";
+                strResult += "</tr>";
+
+            });
+            strResult += "</table>";
+            $("#divResult").html(strResult);
+        }
+
+      
+        }
+
+        $(document).ready(GetAllEmployees) ;
+
+         
+
+
+       
+
+   
+    </script>

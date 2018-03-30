@@ -25,14 +25,14 @@ namespace _6313Titan.Controllers.Api
             return _context.Cases.ToList().Select(Mapper.Map<Case,CaseDTO>);
         }
 
-        public CaseDTO GetCase(Guid Id)
+        public IHttpActionResult GetCase(Guid Id)
         {
             var Case = _context.Cases.SingleOrDefault(c => c.Id == Id);
 
             if (Case == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
 
-            return Mapper.Map<Case,CaseDTO>(Case);
+            return Ok( Mapper.Map<Case,CaseDTO>(Case));
         }
 
         [HttpPost]
@@ -63,6 +63,20 @@ namespace _6313Titan.Controllers.Api
             Mapper.Map(CaseDto,CaseInDb);
 
             _context.SaveChanges();
+        }
+
+        [HttpDelete]
+        public IHttpActionResult DeleteCase(Guid id)
+        {
+            var movieInDb = _context.Cases.SingleOrDefault(c => c.Id == id);
+
+            if (movieInDb == null)
+                return NotFound();
+
+            _context.Cases.Remove(movieInDb);
+            _context.SaveChanges();
+
+            return Ok();
         }
     }
 }

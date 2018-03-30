@@ -13,8 +13,8 @@ namespace _6313Titan.App_Start
 
         public MappingProfile()
         {
-            Mapper.CreateMap<Case, CaseDTO>();
-            Mapper.CreateMap<CaseDTO, Case>();
+            CreateMap<Case, CaseDTO>();
+            CreateMap<CaseDTO, Case>();
         }
     }
 }

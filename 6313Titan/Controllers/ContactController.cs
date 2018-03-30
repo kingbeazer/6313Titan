@@ -1,9 +1,12 @@
-﻿using _6313Titan.Models;
+﻿using _6313Titan.DataAccess.Persistence.Repositories;
+using _6313Titan.Models;
 using _6313Titan.Models.App.Extensions;
 using _6313Titan.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Mvc;
 
@@ -11,11 +14,11 @@ namespace _6313Titan.Controllers
 {
     public class ContactController : Controller
     {
-        private ApplicationDbContext _context;
+        private UnitOfWork unitofwork;
 
         public ContactController()
         {
-            _context = new ApplicationDbContext();
+            unitofwork = new UnitOfWork(new ApplicationDbContext());
         }
 
         protected override void Dispose(bool disposing)
@@ -27,13 +30,7 @@ namespace _6313Titan.Controllers
         public ActionResult Index(Guid PortalId)
         {
             ViewBag.data = PortalId;
-
-            var contacts = _context.Contact
-                .Where(pId => pId.PortalId == PortalId)
-                .ToList();
-            ViewBag.datasource = contacts;
-
-
+            var contacts = unitofwork.Contacts.Find(contact => contact.PortalId == PortalId);
             return View(contacts);
         }
 
@@ -56,9 +53,7 @@ namespace _6313Titan.Controllers
             {
                 var viewModel = new ContactFormViewModel
                 {
-
                     Contact = contactFormViewModel.Contact
-
                 };
                 return View("ContactForm", viewModel);
             }
@@ -66,12 +61,15 @@ namespace _6313Titan.Controllers
             if (contactFormViewModel.Contact.Id == Guid.Empty)
             {
                 contactFormViewModel.Contact.Id = Guid.NewGuid();
-                //contact.PortalId = Titan.Controllers.PortalsController.CurrentPortalGuid;
+                contactFormViewModel.Contact.PortalId = contactFormViewModel.PortalId;
+                unitofwork.Contacts.Add(contactFormViewModel.Contact);
+                unitofwork.Complete();
+            }
+            else
+            {
+                var contactInDb = unitofwork.Contacts.Get(contactFormViewModel.Contact.Id);
                 contactFormViewModel.Contact.PortalId  = contactFormViewModel.PortalId;
-
-
-
-                _context.Contact.Add(contactFormViewModel.Contact);
+                unitofwork.Contacts.Add(contactFormViewModel.Contact);
             }
             else
             {

@@ -5,48 +5,63 @@
     Layout = "~/Views/Shared/_LayoutWithMenu.cshtml";
 }
 
+<h2>Cases</h2>
+<p><a class="btn btn-outline-dark" style="width: 200px" onclick="location.href='@Url.Action( "New", "Cases", new { PortalId = Model.Portal.Id }, null)'">New Case &raquo;</a></p>
 
-<div class="main">
-    <h2>@Model.Portal.Name</h2>
-</div>
+<table id="cases" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Subject</th>
+            <th>Description</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
 
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = $("#cases").DataTable({
+                ajax: {
+                    url: "../../api/cases",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "subject",
+                        render: function (data, type, cases) {
+                            return "<a href='/customers/edit/" + cases.id + "'>" + data + "</a>";
+                        }
+                    },
+                    {
+                        data: "description"
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn-link js-delete' data-cases-id=" + data + ">Delete</button>";
+                        }
+                    }
+                ]
+            });
 
-<div class="row">
-    @foreach (var portalCase in Model.PortalCases)
-    {
-        <div class="col-md-4">
-            <h2>@portalCase.Subject</h2>
-            <div class="row imagetile">
-                <div class="col-md-5">
-                    <table>
-                        <tbody>
-                            <tr>
-                                @*<td>
-                                        <div class="left-image">
-                                            <img style="width:90px" src="~/Content/Images/gonzo.jpg" />
-                                        </div>
-                                    </td>*@
-                                <td>
-                                    <div style="horz-align: right;">
-                                        <div class="e-exptitle">
-                                            <label class="e-name">
-                                                Owner: @User.Identity.Name
-                                            </label><br>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            $("#cases").on("click", ".js-delete", function () {
+                var button = $(this);
 
-            </div>
-            <p>
-                @portalCase.Description
-            </p>
-        </div>
-    }
-</div>
-
-
-<p><a class="btn btn-default" style="width: 200px" onclick="location.href='@Url.Action( "New", "Cases", new { PortalId = Model.Portal.Id }, null)'">Add Case</a></p>
+                bootbox.confirm("Are you sure you want to delete this case?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/cases/" + button.attr("data-cases-id"),
+                            method: "DELETE",
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

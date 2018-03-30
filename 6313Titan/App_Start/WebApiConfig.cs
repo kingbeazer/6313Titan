@@ -14,7 +14,7 @@ namespace _6313Titan
             var settings = config.Formatters.JsonFormatter.SerializerSettings;
             settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             settings.Formatting = Formatting.Indented;
-
+            settings.NullValueHandling = NullValueHandling.Include;
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
