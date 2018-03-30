@@ -64,5 +64,19 @@ namespace _6313Titan.Controllers.Api
 
             _context.SaveChanges();
         }
+
+        [HttpDelete]
+        public IHttpActionResult DeleteCase(Guid id)
+        {
+            var movieInDb = _context.Cases.SingleOrDefault(c => c.Id == id);
+
+            if (movieInDb == null)
+                return NotFound();
+
+            _context.Cases.Remove(movieInDb);
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
 }

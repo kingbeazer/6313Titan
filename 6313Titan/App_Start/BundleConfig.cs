@@ -14,7 +14,7 @@ namespace _6313Titan
                         "~/scripts/bootbox.js",
                         "~/Scripts/respond.js",
                         "~/scripts/datatables/jquery.datatables.js",
-                        "~/scripts/datatables/datatables.bootstrap.js",
+                        "~/scripts/datatables/datatables.bootstrap4.js",
                         "~/scripts/typeahead.bundle.js",
                         "~/scripts/toastr.js"
                       ));
@@ -29,9 +29,10 @@ namespace _6313Titan
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                     "~/Content/bootstrap-Slate.css",
+                     "~/Content/bootstrap-sketchy.css",
+                     //"~/Content/bootstrap-slate.css",
                      "~/Content/bootstrap-theme.css",
-                     "~/content/datatables/css/datatables.bootstrap.css",
+                     "~/content/datatables/css/datatables.bootstrap4.css",
                      "~/content/typeahead.css",
                      "~/content/toastr.css",
                      "~/Content/site.css"));
