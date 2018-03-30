@@ -21,29 +21,17 @@ namespace _6313Titan.Controllers
             unitofwork = new UnitOfWork(new ApplicationDbContext());
         }
 
-
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
 
         // GET: Contact
         public ActionResult Index(Guid PortalId)
         {
             ViewBag.data = PortalId;
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("http://localhost:54551/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                var response = client.GetAsync("api/contacts?PortalId=c83d06bb-33f4-42cc-8035-020fe7b4dabf").Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseString = response.Content.ReadAsStringAsync().Result;
-                }
-            }
-            //var contacts = unitofwork.Contacts.Find(contact => contact.PortalId == PortalId);
-            //ViewBag.datasource = contacts;
-
-
-            return View();
-            //return View(contacts);
+            var contacts = unitofwork.Contacts.Find(contact => contact.PortalId == PortalId);
+            return View(contacts);
         }
 
         [Authorize]
@@ -65,9 +53,7 @@ namespace _6313Titan.Controllers
             {
                 var viewModel = new ContactFormViewModel
                 {
-
                     Contact = contactFormViewModel.Contact
-
                 };
                 return View("ContactForm", viewModel);
             }
@@ -75,23 +61,25 @@ namespace _6313Titan.Controllers
             if (contactFormViewModel.Contact.Id == Guid.Empty)
             {
                 contactFormViewModel.Contact.Id = Guid.NewGuid();
-                //contact.PortalId = Titan.Controllers.PortalsController.CurrentPortalGuid;
                 contactFormViewModel.Contact.PortalId = contactFormViewModel.PortalId;
-
-
-
                 unitofwork.Contacts.Add(contactFormViewModel.Contact);
                 unitofwork.Complete();
             }
             else
             {
                 var contactInDb = unitofwork.Contacts.Get(contactFormViewModel.Contact.Id);
+                contactFormViewModel.Contact.PortalId  = contactFormViewModel.PortalId;
+                unitofwork.Contacts.Add(contactFormViewModel.Contact);
+            }
+            else
+            {
+                var contactInDb = _context.Contact.Single(c => c.Id == contactFormViewModel.Contact.Id);
                 contactInDb.Name = contactFormViewModel.Contact.Name;
                 contactInDb.Email = contactFormViewModel.Contact.Email;
                 contactInDb.MobileNumber = contactFormViewModel.Contact.MobileNumber;
                 contactInDb.WorkNumber = contactFormViewModel.Contact.WorkNumber;
             }
-                //unitofwork.Contacts.Add(contactFormViewModel.Contact);
+            _context.SaveChanges();
             return RedirectToAction("Index", "Contact", new { PortalId = contactFormViewModel.PortalId });
         }
     }

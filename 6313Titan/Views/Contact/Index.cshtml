@@ -1,0 +1,51 @@
+﻿@model IEnumerable<_6313Titan.Models.Contact>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+@if (!Model.Any())
+{
+    <p><a class="btn btn-default" style="width: 200px" onclick="location.href='@Url.Action("New", "Contact", new { PortalId = ViewBag.data})'">New &raquo;</a></p>
+
+    @*<p> We don't have any customers yet.</p>*@
+}
+else
+{
+    <p><a class="btn btn-default" style="width: 200px" onclick="location.href='@Url.Action("New", "Contact", new { PortalId = ViewBag.data})'">New &raquo;</a></p>
+    foreach (var contact in Model)
+    {
+        <div class="col-md-4">
+            <h2>@contact.Name</h2>
+            <div class="row imagetile">
+                <div class="col-md-5">
+                    <table>
+                        <tbody>
+                            <tr>
+                                @*<td>
+                                        <div class="left-image">
+                                            <img style="width:90px" src="~/Content/Images/gonzo.jpg" />
+                                        </div>
+                                    </td>*@
+                                <td>
+                                    <div style="horz-align: right;">
+                                        <div class="e-exptitle">
+                                            <label class="e-name">
+
+                                            </label><br>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <p>
+
+            </p>
+
+        </div>
+    }
+}

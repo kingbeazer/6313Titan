@@ -53,33 +53,7 @@ namespace _6313Titan
 
             //return Task.FromResult(0);
         }
-        public bool SendEmail(string mailTo, string subject, string body)
-        {
-            try
-            {
-                SmtpClient SmtpServer = new SmtpClient();
-                MailMessage mail = new MailMessage();
-                SmtpServer.Credentials = new System.Net.NetworkCredential("beattie.edwin@gmail.com", "g1ll1angm");
-                SmtpServer.Port = 587;
-                SmtpServer.Host = "smtp.gmail.com";
-                SmtpServer.EnableSsl = true;
-                mail = new MailMessage();
-                AlternateView plainView = AlternateView.CreateAlternateViewFromString("Sorry you dont support HTML", null, "text/plain");
-                AlternateView htmlView = AlternateView.CreateAlternateViewFromString(body, null, "text/html");
-                mail.AlternateViews.Add(plainView);
-                mail.AlternateViews.Add(htmlView);
-                mail.From = new MailAddress("beattie.edwin@gmail.com", "6313 Admin");
-                mail.To.Add(mailTo);
-                mail.Subject = subject;
-                mail.IsBodyHtml = true;
-                SmtpServer.Send(mail);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-        }
+       
     }
 
     public class SmsService : IIdentityMessageService
